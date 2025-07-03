@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Climate Action - SDG 13</title>
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #f4fdfb;
+      color: #1b1b1b;
+      line-height: 1.6;
+    }
+
+    /* Scroll Progress Bar */
+    #progressBar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 0%;
+      height: 5px;
+      background-color: #00c853;
+      z-index: 1001;
+      transition: width 0.2s ease-out;
+    }
+
+    /* NAVIGATION */
+    header {
+      position: fixed;
+      width: 100%;
+      background: rgba(255, 255, 255, 0.9);
+      top: 0;
+      left: 0;
+      z-index: 1000;
+      padding: 10px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    .nav-logo {
+      font-weight: bold;
+      font-size: 1.2rem;
+      color: #2e7d32;
+    }
+    nav a {
+      margin: 0 12px;
+      text-decoration: none;
+      color: #2e7d32;
+      font-weight: 500;
+      transition: 0.2s;
+    }
+    nav a:hover {
+      color: #00796b;
+    }
+
+    section {
+      padding: 90px 20px 60px;
+      text-align: center;
+      opacity: 0;
+      transform: translateY(50px);
+      transition: all 1s ease;
+    }
+
+    section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    h2 {
+      color: #2e7d32;
+      margin-bottom: 20px;
+      font-size: 2.2rem;
+    }
+
+    p, li {
+      font-size: 1.1rem;
+    }
+
+    /* HERO */
+    .hero {
+      background: linear-gradient(-45deg, #1de9b6, #1dc4e9, #388e3c, #00695c);
+      background-size: 400% 400%;
+      animation: gradientBG 10s ease infinite;
+      color: white;
+      padding: 150px 20px 100px;
+    }
+    @keyframes gradientBG {
+      0% {background-position: 0% 50%;}
+      50% {background-position: 100% 50%;}
+      100% {background-position: 0% 50%;}
+    }
+    .hero h1 {
+      font-size: 3rem;
+      margin-bottom: 10px;
+    }
+    .btn {
+      margin-top: 20px;
+      display: inline-block;
+      padding: 12px 30px;
+      background: white;
+      color: #1b5e20;
+      text-decoration: none;
+      font-weight: 600;
+      border-radius: 8px;
+      transition: 0.3s ease;
+    }
+    .btn:hover {
+      background: #c8e6c9;
+    }
+
+    /* LOGO */
+    .logo-container {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    .logo {
+      max-width: 100px;
+      height: auto;
+      border-radius: 12px;
+      animation: float 3s ease-in-out infinite;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      width: 200px;
+    }
+
+
+
+    @keyframes float {
+      0% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+      100% { transform: translateY(0); }
+    }
+
+    /* GRID */
+    .grid-3, .grid-4 {
+      display: grid;
+      gap: 20px;
+      padding: 20px;
+    }
+    .grid-3 {
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    }
+    .grid-4 {
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    }
+
+    /* Cards and SDGs */
+    .card, .sdg {
+      background: #ffffff;
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 0 12px rgba(0,0,0,0.07);
+      transition: all 0.3s ease;
+      touch-action: manipulation;
+    }
+
+    .card:hover, .sdg:hover,
+    .card:active, .sdg:active {
+      transform: scale(1.05);
+      box-shadow: 0 12px 20px rgba(0,0,0,0.12);
+    }
+
+    .sdg {
+      background: #c5e1a5;
+      font-weight: 600;
+      color: #1b5e20;
+    }
+
+    .sdg.highlight {
+      background: #ef6c00;
+      color: white;
+    }
+
+    /* Action */
+    .action ul {
+      list-style: none;
+      padding-left: 0;
+    }
+    .action li {
+      padding: 10px;
+      font-size: 1.1rem;
+    }
+    .inspire {
+      font-style: italic;
+      color: #4e342e;
+      margin-top: 15px;
+    }
+
+    footer {
+      background: #1b5e20;
+      color: white;
+      padding: 60px 20px;
+    }
+    footer blockquote {
+      font-size: 1.2rem;
+      margin-bottom: 10px;
+      font-style: italic;
+    }
+
+    @media screen and (max-width: 480px) {
+      .hero h1 {
+        font-size: 2.2rem;
+      }
+      h2 {
+        font-size: 1.6rem;
+      }
+      nav {
+        font-size: 0.9rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Progress Bar -->
+  <div id="progressBar"></div>
+
+  <!-- Navigation -->
+  <header>
+    <div class="nav-logo">Climate Action</div>
+    <nav>
+      <a href="#problem" onclick="playClick()">Problem</a>
+      <a href="#goal13" onclick="playClick()">Goal 13</a>
+      <a href="#sdgs" onclick="playClick()">All SDGs</a>
+      <a href="#action" onclick="playClick()">Action</a>
+    </nav>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="logo-container">
+      <img src="file:///C:/Users/User/Downloads/Logo%20Produk%20Penghantaran%20Tukang%20Rencam%20Kebersihan%20Garisan%20Mono%20Ringkas%20Putih%20Kuning%20dan%20Hijau.png" alt="Your Logo" class="logo" style="width: 200px;">
+    </div>
+    <h1>Climate Action</h1>
+    <p>It's time to act before it's too late.</p>
+    <a href="#action" class="btn" onclick="playClick()">Take Action Now</a>
+  </section>
+
+  <!-- Problem -->
+  <section class="section" id="problem">
+    <h2>The Climate Crisis</h2>
+    <div class="grid-3">
+      <div class="card">
+        <h3>Rising Temperatures</h3>
+        <p>2023 was the hottest year ever recorded. Heatwaves are becoming more dangerous and deadly.</p>
+      </div>
+      <div class="card">
+        <h3>Extreme Disasters</h3>
+        <p>Floods, droughts, and wildfires now strike harder and more often, affecting millions.</p>
+      </div>
+      <div class="card">
+        <h3>Sea Level Rise</h3>
+        <p>Rising oceans threaten coastal cities, displace communities, and erode natural habitats.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SDG 13 -->
+  <section class="section" id="goal13">
+    <h2>What is SDG 13?</h2>
+    <p>
+      SDG 13 calls for urgent climate action. It’s time to reduce emissions, protect the vulnerable, and build a future where nature and people thrive together.
+    </p>
+  </section>
+
+  <!-- All 17 Goals -->
+  <section class="section" id="sdgs">
+    <h2>The 17 Global Goals</h2>
+    <div class="grid-4">
+      <div class="sdg">1. No Poverty</div>
+      <div class="sdg">2. Zero Hunger</div>
+      <div class="sdg">3. Good Health</div>
+      <div class="sdg">4. Quality Education</div>
+      <div class="sdg">5. Gender Equality</div>
+      <div class="sdg">6. Clean Water</div>
+      <div class="sdg">7. Clean Energy</div>
+      <div class="sdg">8. Decent Work</div>
+      <div class="sdg">9. Innovation</div>
+      <div class="sdg">10. Reduced Inequality</div>
+      <div class="sdg">11. Sustainable Cities</div>
+      <div class="sdg">12. Responsible Consumption</div>
+      <div class="sdg highlight">13. Climate Action</div>
+      <div class="sdg">14. Life Below Water</div>
+      <div class="sdg">15. Life on Land</div>
+      <div class="sdg">16. Peace & Justice</div>
+      <div class="sdg">17. Partnerships</div>
+    </div>
+  </section>
+
+  <!-- Action -->
+  <section class="section action" id="action">
+    <h2>What Can You Do?</h2>
+    <ul>
+      <li>*Use a bicycle or walk instead of driving.</li>
+      <li>*Turn off lights and unplug devices when not needed.</li>
+      <li>*Plant trees and protect local green spaces.</li>
+      <li>*Speak up — climate conversations matter.</li>
+      <li>*Use reusable containers and reduce plastic use.</li>
+      <li>*Recycle and support eco-friendly companies.</li>
+    </ul>
+    <p class="inspire">The planet needs heroes. Be one.</p>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <blockquote>
+      "We do not inherit the Earth from our ancestors, we borrow it from our children."
+    </blockquote>
+    <p>Created by Kawiin George | Coolest Projects Malaysia 2025</p>
+  </footer>
+
+  <!-- Scripts -->
+  <script>
+    // Fade-in reveal
+    const sections = document.querySelectorAll("section");
+    const reveal = () => {
+      sections.forEach(section => {
+        const rect = section.getBoundingClientRect();
+        if (rect.top < window.innerHeight - 100) {
+          section.classList.add("visible");
+        }
+      });
+    };
+    window.addEventListener("scroll", reveal);
+    window.addEventListener("load", reveal);
+
+    // Scroll progress bar
+    const progressBar = document.getElementById("progressBar");
+    window.onscroll = function () {
+      const winScroll = document.documentElement.scrollTop;
+      const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const scrolled = (winScroll / height) * 100;
+      progressBar.style.width = scrolled + "%";
+    };
+
+    // Click sound
+    const clickSound = new Audio("");
+    function playClick() {
+      clickSound.currentTime = 0;
+      clickSound.play();
+    }
+  </script>
+</body>
+</html>
